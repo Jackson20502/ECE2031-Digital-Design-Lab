@@ -1,0 +1,6 @@
+
+State Machine - |StateMachineVHDL|state
+Name state.blue state.Green state.Red 
+state.Red 0 0 0 
+state.Green 0 1 1 
+state.blue 1 0 1 

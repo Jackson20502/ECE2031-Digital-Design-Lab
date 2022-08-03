@@ -1,0 +1,16 @@
+|StateMachineVHDL
+xmas => process_0.IN0
+xmas => process_0.IN0
+xmas => process_0.IN0
+cool => process_0.IN1
+cool => process_0.IN1
+cool => process_0.IN1
+resetn => state~3.DATAIN
+clk => state~1.DATAIN
+r_en <= r_en.DB_MAX_OUTPUT_PORT_TYPE
+g_en <= g_en.DB_MAX_OUTPUT_PORT_TYPE
+b_en <= b_en.DB_MAX_OUTPUT_PORT_TYPE
+Q[0] <= Q[0].DB_MAX_OUTPUT_PORT_TYPE
+Q[1] <= Q[1].DB_MAX_OUTPUT_PORT_TYPE
+
+
