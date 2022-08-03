@@ -1,4 +1,4 @@
 # ECE2031-Digital-Design-Lab  
 Digital Design Lab  
-Fall 2021  
+Spring 2022    
 Thomas Riley Collins/Kevin Toby Johnson
