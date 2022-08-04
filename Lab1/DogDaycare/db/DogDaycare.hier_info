@@ -1,0 +1,15 @@
+|DogDaycare
+alarm <= inst9.DB_MAX_OUTPUT_PORT_TYPE
+F2 => inst1.IN0
+F2 => inst3.IN0
+B2 => inst1.IN1
+B2 => inst2.IN1
+B1 => inst3.IN1
+B1 => inst.IN1
+F1 => inst2.IN0
+F1 => inst.IN0
+M => inst11.IN1
+M => inst13.IN0
+warning <= inst12.DB_MAX_OUTPUT_PORT_TYPE
+
+

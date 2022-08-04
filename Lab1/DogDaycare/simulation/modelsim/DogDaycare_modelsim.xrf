@@ -1,0 +1,15 @@
+vendor_name = ModelSim
+source_file = 1, D:/ECE2031Labs/Lab1/DogDaycare/db/DogDaycare.bdf
+source_file = 1, D:/ECE2031Labs/Lab1/DogDaycare/Waveform.vwf
+source_file = 1, D:/ECE2031Labs/Lab1/DogDaycare/db/DogDaycare.cbx.xml
+design_name = DogDaycare
+instance = comp, \alarm~output\, alarm~output, DogDaycare, 1
+instance = comp, \warning~output\, warning~output, DogDaycare, 1
+instance = comp, \F2~input\, F2~input, DogDaycare, 1
+instance = comp, \F1~input\, F1~input, DogDaycare, 1
+instance = comp, \M~input\, M~input, DogDaycare, 1
+instance = comp, \B2~input\, B2~input, DogDaycare, 1
+instance = comp, \B1~input\, B1~input, DogDaycare, 1
+instance = comp, \inst9~0\, inst9~0, DogDaycare, 1
+instance = comp, \inst12~0\, inst12~0, DogDaycare, 1
+instance = comp, \~QUARTUS_CREATED_GND~I\, ~QUARTUS_CREATED_GND~I, DogDaycare, 1
