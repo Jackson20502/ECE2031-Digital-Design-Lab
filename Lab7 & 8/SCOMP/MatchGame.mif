@@ -1,0 +1,75 @@
+-- Altera Memory Initialization File (MIF)
+
+DEPTH = 2048;
+WIDTH = 16;
+
+ADDRESS_RADIX = HEX;
+DATA_RADIX = HEX;
+
+CONTENT
+  BEGIN
+    [000..7FF] : 0000;  -- Default to NOP
+
+           000 : 083B;  -- 	Load   		TotalScore			; Initialize TotalScore
+           001 : 483C;  -- 	AND    		Zero
+           002 : 103B;  -- 	STORE  		TotalScore
+           003 : 0838;  -- 	Load   		LEDDisplayNum		; Initialize LEDDisplayNum
+           004 : 483C;  -- 	AND    		Zero
+           005 : 1038;  -- 	STORE  		LEDDisplayNum
+           006 : 0839;  -- 	Load   		TimeCounter			; Initialize TimeCounter
+           007 : 483C;  -- 	AND    		Zero
+           008 : 1039;  -- 	STORE  		TimeCounter
+           009 : 9000;  --     IN			Switches
+           00A : 400C;  -- 	JZERO		IncrementAC			; When all switches are down, increment the value in AC
+           00B : 2809;  -- 	JUMP		CheckDown			; If not, continue checking
+           00C : 0838;  --     Load		LEDDisplayNum
+           00D : 6801;  -- 	ADDI		1
+           00E : 1038;  -- 	STORE		LEDDisplayNum
+           00F : 6C01;  -- 	ADDI		-1023
+           010 : 4016;  -- 	JZERO		ResetAC				; If hit the bound, reset LEDDisplayNum to 0
+           011 : 0838;  -- 	LOAD		LEDDisplayNum
+           012 : 9801;  -- 	OUT			LEDs
+           013 : 9000;  -- 	IN			Switches
+           014 : 381A;  -- 	JPOS		CountTime			; If one of the switches is up, freeze LEDDisplayNum and start counting time
+           015 : 400C;  -- 	JZERO		IncrementAC
+           016 : 0838;  --     Load		LEDDisplayNum
+           017 : 483C;  -- 	AND			Zero
+           018 : 1038;  -- 	STORE		LEDDisplayNum
+           019 : 280C;  -- 	JUMP		IncrementAC
+           01A : 9000;  -- 	IN			Switches
+           01B : 2038;  -- 	SUB			LEDDisplayNum
+           01C : 4022;  -- 	JZERO		SwitchMatch
+           01D : 8033;  -- 	CALL		Delay				; Increment TimeCounter ten times per second
+           01E : 0839;  --     Load		TimeCounter
+           01F : 6FFF;  -- 	ADDI		-1
+           020 : 1039;  -- 	STORE		TimeCounter
+           021 : 281A;  -- 	JUMP		CountTime
+           022 : 0839;  --     LOAD		TimeCounter
+           023 : 183D;  -- 	ADD			Fifty
+           024 : 103A;  -- 	STORE		NewScore
+           025 : 083B;  -- 	LOAD		TotalScore
+           026 : 183A;  -- 	ADD			NewScore
+           027 : 103B;  -- 	STORE		TotalScore
+           028 : 302F;  -- 	JNEG		TotalScore0
+           029 : 083B;  -- 	LOAD		TotalScore
+           02A : 9804;  -- 	OUT			Hex0				; Output on 7-segment display
+           02B : 0839;  -- 	LOAD		TimeCounter			; If match, reset the TimeCounter
+           02C : 483C;  -- 	AND			Zero
+           02D : 1039;  -- 	STORE		TimeCounter
+           02E : 2809;  -- 	JUMP		CheckDown
+           02F : 083B;  -- 	LOAD		TotalScore
+           030 : 483C;  -- 	AND			Zero
+           031 : 103B;  -- 	STORE		TotalScore
+           032 : 2829;  -- 	JUMP		DisplayTotalScore
+           033 : 9802;  -- 	OUT    Timer
+           034 : 9002;  -- 	IN     Timer
+           035 : 6FFF;  -- 	ADDI   -1
+           036 : 3034;  -- 	JNEG   WaitingLoop
+           037 : 8800;  -- 	RETURN
+           038 : 0000;  -- LEDDisplayNum:	DW 0
+           039 : 0000;  -- TimeCounter:	DW 0
+           03A : 0000;  -- NewScore:		DW 0
+           03B : 0000;  -- TotalScore:		DW 0
+           03C : 0000;  -- Zero:			DW &B0000000000
+           03D : 0032;  -- Fifty:			DW 50
+  END;

@@ -1,0 +1,30 @@
+-- Altera Memory Initialization File (MIF)
+
+DEPTH = 2048;
+WIDTH = 16;
+
+ADDRESS_RADIX = HEX;
+DATA_RADIX = HEX;
+
+CONTENT
+  BEGIN
+    [000..7FF] : 0000;  -- Default to NOP
+
+           000 : B800;  --     LOADI   0         ; Start at 0
+           001 : 1010;  --     STORE   Temp
+           002 : 0810;  --     LOAD    Temp
+           003 : 98A2;  --     OUT     EXT_A     ; Tell peripheral "address is __"
+           004 : 6001;  --     SHIFT   1         ; Shift that value left one place
+           005 : 98A3;  --     OUT     EXT_D     ; Tell peripheral "data is __"
+           006 : 0810;  --     LOAD    Temp
+           007 : 6801;  --     ADDI    1         ; Increment the counter
+           008 : 1010;  --     STORE   Temp
+           009 : 400B;  --     JZERO   Loop2     ; If counter has rolled over, end loop
+           00A : 2802;  --     JUMP    Loop1     ; Otherwise, loop
+           00B : 9000;  --     IN      SWITCHES  ; Get value from switches
+           00C : 98A2;  --     OUT     EXT_A     ; Tell peripheral that's the address
+           00D : 90A3;  --     IN      EXT_D     ; Get the data at that address
+           00E : 9801;  --     OUT     LEDS      ; Display it
+           00F : 280B;  --     JUMP    Loop2     ; Repeat forever
+           010 : 0000;  -- Temp: DW 0
+  END;

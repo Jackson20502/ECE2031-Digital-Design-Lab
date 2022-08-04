@@ -1,0 +1,49 @@
+-- Altera Memory Initialization File (MIF)
+
+DEPTH = 2048;
+WIDTH = 16;
+
+ADDRESS_RADIX = HEX;
+DATA_RADIX = HEX;
+
+CONTENT
+  BEGIN
+    [000..7FF] : 0000;  -- Default to NOP
+
+           000 : B800;  --     LOADI  0
+           001 : 98A2;  --     OUT    EXT_A        ; Start at address 0
+           002 : B803;  --     LOADI  3
+           003 : 98A3;  --     OUT    EXT_D
+           004 : 6801;  --     ADDI   1
+           005 : 98A3;  --     OUT    EXT_D
+           006 : 6801;  --     ADDI   1
+           007 : 98A3;  --     OUT    EXT_D
+           008 : 6801;  --     ADDI   1
+           009 : 98A3;  --     OUT    EXT_D
+           00A : 6801;  --     ADDI   1
+           00B : 98A3;  --     OUT    EXT_D
+           00C : 6801;  --     ADDI   1
+           00D : 98A3;  --     OUT    EXT_D
+           00E : B805;  --     LOADI  5
+           00F : 98A2;  --     OUT    EXT_A        ; Start at address 5
+           010 : B80A;  --     LOADI  &HA
+           011 : 98A3;  --     OUT    EXT_D
+           012 : 6801;  --     ADDI   1
+           013 : 98A3;  --     OUT    EXT_D
+           014 : 6801;  --     ADDI   1
+           015 : 98A3;  --     OUT    EXT_D
+           016 : 6801;  --     ADDI   1
+           017 : 98A3;  --     OUT    EXT_D
+           018 : 6801;  --     ADDI   1
+           019 : 98A3;  --     OUT    EXT_D
+           01A : B804;  --     LOADI  4
+           01B : 98A2;  --     OUT    EXT_A
+           01C : 90A3;  --     IN     EXT_D
+           01D : 9801;  --     OUT    LEDs
+           01E : 90A3;  --     IN     EXT_D
+           01F : 9804;  --     OUT    Hex0
+           020 : 90A3;  --     IN     EXT_D
+           021 : 90A3;  --     IN     EXT_D
+           022 : 9805;  --     OUT    Hex1
+           023 : 2823;  --     JUMP   Die
+  END;

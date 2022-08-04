@@ -1,0 +1,54 @@
+-- Altera Memory Initialization File (MIF)
+
+DEPTH = 2048;
+WIDTH = 16;
+
+ADDRESS_RADIX = HEX;
+DATA_RADIX = HEX;
+
+CONTENT
+  BEGIN
+    [000..7FF] : 0000;  -- Default to NOP
+
+           000 : 9000;  -- 	IN     Switches
+           001 : 9801;  -- 	OUT    LEDs
+           002 : 1024;  -- 	STORE  Pattern
+           003 : 801F;  -- 	CALL   Delay
+           004 : 0824;  -- 	LOAD   Pattern
+           005 : 4826;  -- 	AND    Bit9         ; bit mask	
+           006 : 380C;  -- 	JPOS   SetLeft
+           007 : 0824;  -- 	LOAD   Pattern
+           008 : 6001;  -- 	SHIFT  1
+           009 : 1024;  -- 	STORE  Pattern
+           00A : 9801;  -- 	OUT    LEDs
+           00B : 2803;  -- 	JUMP   Left
+           00C : 0824;  -- 	LOAD   Pattern
+           00D : 4827;  -- 	AND    BitL
+           00E : 1024;  -- 	STORE  Pattern
+           00F : 9801;  -- 	OUT    LEDs
+           010 : 2811;  -- 	JUMP   Right
+           011 : 801F;  -- 	CALL   Delay
+           012 : 0824;  -- 	LOAD   Pattern
+           013 : 4825;  -- 	AND    Bit0         ; bit mask
+           014 : 381A;  -- 	JPOS   SetRight
+           015 : 0824;  -- 	LOAD   Pattern
+           016 : 6011;  -- 	SHIFT  -1
+           017 : 1024;  -- 	STORE  Pattern
+           018 : 9801;  -- 	OUT    LEDs
+           019 : 2811;  -- 	JUMP   Right
+           01A : 0824;  -- 	LOAD   Pattern
+           01B : 4828;  -- 	AND    BitR
+           01C : 1024;  -- 	STORE  Pattern
+           01D : 9801;  -- 	OUT    LEDs
+           01E : 2803;  -- 	JUMP   Left
+           01F : 9802;  -- 	OUT    Timer
+           020 : 9002;  -- 	IN     Timer
+           021 : 6FFE;  -- 	ADDI   -2
+           022 : 3020;  -- 	JNEG   WaitingLoop
+           023 : 8800;  -- 	RETURN
+           024 : 0000;  -- Pattern:   DW 0
+           025 : 0001;  -- Bit0:      DW &B0000000001
+           026 : 0200;  -- Bit9:      DW &B1000000000
+           027 : 01FF;  -- BitL:      DW &B0111111111
+           028 : 03FE;  -- BitR:      DW &B1111111110
+  END;
