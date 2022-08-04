@@ -1,0 +1,30 @@
+|MooreStateMachine
+r_en <= inst6.DB_MAX_OUTPUT_PORT_TYPE
+clock => 7474:inst7.1CLK
+clock => 7474:inst7.2CLK
+cool => inst.IN0
+cool => inst1.IN1
+xmas => inst4.IN0
+resetn => 7474:inst7.2CLRN
+resetn => 7474:inst7.1CLRN
+g_en <= 7474:inst7.2Q
+b_en <= 7474:inst7.1Q
+Q[0] <= 7474:inst7.2Q
+Q[1] <= 7474:inst7.1Q
+
+
+|MooreStateMachine|7474:inst7
+1Q <= 9.DB_MAX_OUTPUT_PORT_TYPE
+1CLRN => 9.ACLR
+1CLK => 9.CLK
+1D => 9.DATAIN
+1PRN => 9.PRESET
+1QN <= 16.DB_MAX_OUTPUT_PORT_TYPE
+2Q <= 10.DB_MAX_OUTPUT_PORT_TYPE
+2CLRN => 10.ACLR
+2CLK => 10.CLK
+2D => 10.DATAIN
+2PRN => 10.PRESET
+2QN <= 15.DB_MAX_OUTPUT_PORT_TYPE
+
+
